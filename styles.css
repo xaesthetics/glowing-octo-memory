@@ -1,11 +1,33 @@
-/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@400;700&display=swap');
+
 body {
-    background: linear-gradient(135deg, #001f3f, #000c1a);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     color: #f1f1f1;
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
+    overflow-x: hidden;
+}
+
+/* Header with Graffiti Style */
+.header {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3.5rem;
+    background: linear-gradient(45deg, #ff00cc, #3333ff, #00ccff, #ff0066);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    margin: 20px 0;
+    letter-spacing: 2px;
+    animation: rainbow 8s linear infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 /* Video Container */
@@ -14,54 +36,116 @@ body {
     max-width: 900px;
     margin: 30px auto;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 0, 255, 0.1),
+        rgba(0, 255, 255, 0.1),
+        rgba(255, 255, 0, 0.1)
+    );
+    transform: rotate(30deg);
+    z-index: -1;
+    animation: shine 6s infinite linear;
+}
+
+@keyframes shine {
+    0% { transform: rotate(30deg) translate(-10%, -10%); }
+    100% { transform: rotate(30deg) translate(10%, 10%); }
 }
 
 .video-container:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(255, 20, 147, 0.5);
 }
 
 iframe {
     width: 100%;
     height: 450px;
     border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Suggested Videos Grid */
 .suggested-videos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    max-width: 1000px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 /* Video Items */
 .video-item {
-    background: rgba(255, 255, 255, 0.12);
-    padding: 12px;
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 0, 255, 0.1) 0%, 
+        rgba(0, 255, 255, 0.1) 50%, 
+        rgba(255, 255, 0, 0.1) 100%);
+    z-index: -1;
 }
 
 .video-item:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    background: rgba(255, 255, 255, 0.25);
+    z-index: 10;
 }
 
 .video-item img {
     width: 100%;
-    height: auto;
+    height: 120px;
     border-radius: 10px;
     object-fit: cover;
+    transition: transform 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.video-item:hover img {
+    transform: scale(1.05);
+}
+
+.video-item h3 {
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    margin: 10px 0 5px;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px #000;
 }
 
 /* Age Verification Popup */
@@ -71,38 +155,131 @@ iframe {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
 }
 
 .popup-content {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 25px;
-    border-radius: 15px;
-    color: black;
+    background: linear-gradient(135deg, #ff00cc, #3333ff);
+    padding: 30px;
+    border-radius: 20px;
+    color: white;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5);
+    max-width: 450px;
     width: 90%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.popup-content::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, 
+        #ff0000, #ff7300, #fffb00, #48ff00, 
+        #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400%;
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0.5;
+    animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.popup-content h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
 }
 
 /* Buttons */
 button {
-    background: linear-gradient(90deg, #ff0000, #cc0000);
+    background: linear-gradient(45deg, #ff00cc, #3333ff);
     color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
+    padding: 14px 28px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s ease;
-    margin: 8px;
+    margin: 10px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0) 50%, 
+        rgba(255, 255, 255, 0.3) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
 }
 
 button:hover {
-    background: linear-gradient(90deg, #cc0000, #990000);
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 0, 255, 0.6);
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+}
+
+button:hover::after {
+    transform: translateX(100%);
+}
+
+/* Neon Pulse Animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(255, 0, 255, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.9), 0 0 30px rgba(255, 0, 255, 0.5); }
+    100% { box-shadow: 0 0 10px rgba(255, 0, 255, 0.7); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header {
+        font-size: 2.5rem;
+    }
+    
+    .suggested-videos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    iframe {
+        height: 250px;
+    }
+}.subheader {
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+    margin: 20px 0;
+    font-size: 2rem;
+    background: linear-gradient(45deg, #ff00cc, #00ccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
